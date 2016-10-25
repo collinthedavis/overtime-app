@@ -1,10 +1,10 @@
-class CreatePosts < ActiveRecord::Migration[5.0]
+class CreatePosts < ActiveRecord::Migration
   def change
     create_table :posts do |t|
       t.date :date
       t.text :rationale
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end
