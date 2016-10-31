@@ -25,7 +25,6 @@ class PostDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :user,
     :status,
-    :id,
     :date,
     :rationale,
   ].freeze
