@@ -2,7 +2,7 @@ class PostsController < ApplicationController
 	before_action :set_post, only: [:show, :edit, :update, :destroy]
 	
 	def index
-  		@posts = current_user.posts
+		@posts = Post.posts_by current_user
 	end
 
 	def new
@@ -21,17 +21,17 @@ class PostsController < ApplicationController
 	end
 
 	def edit
-  		authorize @post
+		authorize @post
 	end
 
 	def update
-  		authorize @post
-
-  		if @post.update(post_params)
-    		redirect_to @post, notice: 'Your post was edited successfully'
-  		else
-    		render :edit
-  		end
+		authorize @post
+		
+		if @post.update(post_params)
+			redirect_to @post, notice: 'Your post was edited successfully'
+		else
+			render :edit
+		end
 	end
 
 	def show

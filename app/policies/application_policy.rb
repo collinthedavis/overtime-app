@@ -6,10 +6,6 @@ class ApplicationPolicy
     @record = record
   end
 
-  def admin_types
-  ['AdminUser']
-  end
-
   def index?
     false
   end
@@ -40,6 +36,10 @@ class ApplicationPolicy
 
   def scope
     Pundit.policy_scope!(user, record.class)
+  end
+
+  def admin_types
+    ['AdminUser']
   end
 
   class Scope
