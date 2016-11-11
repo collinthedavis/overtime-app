@@ -16,13 +16,13 @@ describe 'navigate' do
       visit posts_path
     end
 
-  	it 'can be reached successfully' do
-  		expect(page.status_code).to eq(200)
-  	end
+    it 'can be reached successfully' do
+      expect(page.status_code).to eq(200)
+    end
 
-  	it 'has a title of Posts' do
-  		expect(page).to have_content(/Posts/)
-  	end
+    it 'has a title of Posts' do
+      expect(page).to have_content(/Posts/)
+    end
 
     it 'has a list of posts' do
       post1 = FactoryGirl.build_stubbed(:post)
@@ -43,6 +43,8 @@ describe 'navigate' do
 
   describe 'new' do
     it 'has a link from the homepage' do
+      employee = Employee.create(first_name: 'Employee', last_name: 'Authorized', email: "employee@example.com", password: "asdfasdf", password_confirmation: "asdfasdf", phone: "5555555555")
+      login_as(employee, :scope => :user)
       visit root_path
 
       click_link("new_post_from_nav")
@@ -67,21 +69,21 @@ describe 'navigate' do
   end
 
   describe 'creation' do
-  	before do
-  		visit new_post_path
-  	end
+    before do
+      visit new_post_path
+    end
 
-  	it 'has a new form that can be reached' do
-  		expect(page.status_code).to eq(200)
-  	end
+    it 'has a new form that can be reached' do
+      expect(page.status_code).to eq(200)
+    end
 
-  	it 'can be created from new form page' do
+    it 'can be created from new form page' do
       fill_in 'post[date]', with: Date.today
       fill_in 'post[rationale]', with: "Some rationale"
       fill_in 'post[overtime_request]', with: 4.5
 
       expect { click_on "Save" }.to change(Post, :count).by(1)
-  	end
+    end
 
     it 'will have a user associated it' do
       fill_in 'post[date]', with: Date.today
